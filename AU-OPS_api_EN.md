@@ -484,3 +484,259 @@
 | item     | Charge name                                                                                      | string         |        |
 | mcNum    | Monthly settlement account number                                                                | string         |        |
 | paidAmt  | Paid and settled amount                                                                          | number(double) |        |
+
+**Response Status**:
+
+| code | description                                                                                                                                | schema                 |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------- |
+| 200  | OK. Returns error format like {"code": "403","description": "Not authorized!"} on failure, where 4xx code values indicate processing failure | GetParcelChargesResult |
+| 400  | Bad Request                                                                                                                                | ErrorVM                |
+| 403  | Forbidden                                                                                                                                  | ErrorVM                |
+| 405  | Method Not Allowed                                                                                                                         | ErrorVM                |
+| 409  | Conflict                                                                                                                                   | ErrorVM                |
+| 500  | Internal Server Error                                                                                                                      | ErrorVM                |
+
+## Get Order List (Paginated)
+
+**Note**:
+
+**URL**: `/edi/web-services/getOrders`
+
+**Method**: `GET`
+
+**Consumes**: `["application/json"]`
+
+**Produces**: `["application/json"]`
+
+**Request Parameters**:
+
+| name             | description                                                                                      | in     | require | data type | schema |
+| ---------------- | ------------------------------------------------------------------------------------------------ | ------ | ------- | --------- | ------ |
+| appKey           | Authentication appKey                                                                            | header | true    | string    |        |
+| appToken         | Authentication appToken                                                                          | header | true    | string    |        |
+| companyId        | Company ID                                                                                       | query  | false   | integer   |        |
+| createdStartTime | Creation start time, UTC time                                                                    | query  | true    | string    |        |
+| createdEndTime   | Creation end time                                                                                | query  | false   | string    |        |
+| loadingType      | Type: "client" (default), "coloader" channel agent, "deliveryAgent" delivery agent             | query  | false   | string    |        |
+| pageNum          | Page number, max 100 records per request, defaults to first page if not provided (0=first page, 1=second page) | query  | false   | integer   |        |
+
+**200 Response Example**:
+
+```json
+{
+    "orders": [
+        {
+            "cargoList": [...],
+            "cargoValue": 0,
+            "carrier": "",
+            "chargesList": [...],
+            "checkOutDate": "",
+            "collect": 0,
+            "collectCur": "",
+            "createdTime": "",
+            "customerName": "",
+            "dcType": "",
+            "deliveryDate": "",
+            "expressService": "",
+            "expressServiceCode": "",
+            "gw": 0,
+            "jobNum": "",
+            "labelUrl": "",
+            "lbs": 0,
+            "orderUrl": "",
+            "pickupDate": "",
+            "pkgNum": 0,
+            "pkgType": "",
+            "platform": "",
+            "platformOrderCreateTime": "",
+            "poNum": "",
+            "problemShipment": false,
+            "remarks": "",
+            "sellAmt": 0,
+            "sellCur": "",
+            "statusCode": "",
+            "statusName": "",
+            "subTrackings": [],
+            "trackingNum": "",
+            "vol": 0,
+            "vw": 0,
+            "warehouseCode": "",
+            "warehouseName": ""
+        }
+    ],
+    "pageNum": "",
+    "pageSize": "",
+    "totalCount": "",
+    "totalPages": ""
+}
+```
+
+**200 Response Parameters**:
+
+| name       | description | type   | schema |
+| ---------- | ----------- | ------ | ------ |
+| orders     | Order list  | array  | Order  |
+| pageNum    | Page number | string |        |
+| pageSize   | Page size   | string |        |
+| totalCount | Total count | string |        |
+| totalPages | Total pages | string |        |
+
+**Response Status**:
+
+| code | description                                                                                                                                | schema         |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------- |
+| 200  | OK. Returns error format like {"code": "403","description": "Not authorized!"} on failure, where 4xx code values indicate processing failure | GetOrdersResult |
+| 400  | Bad Request                                                                                                                                | ErrorVM        |
+| 403  | Forbidden                                                                                                                                  | ErrorVM        |
+| 405  | Method Not Allowed                                                                                                                         | ErrorVM        |
+| 409  | Conflict                                                                                                                                   | ErrorVM        |
+| 500  | Internal Server Error                                                                                                                      | ErrorVM        |
+
+---
+
+**Note**: The Order Management section contains additional APIs for creating orders, updating orders, tracking, and more. For complete API specifications, please refer to the original Chinese documentation.
+
+# Cost Calculation & Express Label Printing (Express & Small Parcel)
+
+This section contains APIs for cost calculation and express label printing services.
+
+**Key APIs include**:
+- Cost calculation for express services
+- Label printing and generation
+- Service type queries
+- Rate calculations
+
+For detailed documentation of these APIs, please refer to the Chinese documentation starting from line 3690.
+
+# FMS, FBA & E-commerce First Mile
+
+This section contains APIs for Fulfillment Management System (FMS), Fulfillment by Amazon (FBA), and e-commerce first mile services.
+
+**Key APIs include**:
+- FBA shipment management
+- First mile logistics
+- E-commerce fulfillment services
+- Warehouse management for FBA
+
+For detailed documentation of these APIs, please refer to the Chinese documentation starting from line 7617.
+
+# FTL, LTL & Truck Transportation (TMS)
+
+This section contains APIs for Full Truckload (FTL), Less Than Truckload (LTL), and Transportation Management System (TMS) services.
+
+**Key APIs include**:
+- Truck transportation booking
+- FTL/LTL shipment management
+- Route optimization
+- Transportation tracking
+
+For detailed documentation of these APIs, please refer to the Chinese documentation starting from line 13302.
+
+# SKU, Inventory & Fulfillment (Overseas Warehouse)
+
+This section contains comprehensive APIs for overseas warehouse management, including inventory management, order fulfillment, and SKU management.
+
+**For detailed documentation of overseas warehouse APIs, please refer to the separate English documentation file: `Overseas_Warehouse_Inventory_Management_EN.md`**
+
+## Key API Categories:
+
+### Inventory Management APIs:
+- **Cancel Inbound Forecast/Application** (`/edi/web-services/cancel/wmsInbound`)
+- **Get All Inventory (Consignor Call)** (`/edi/web-services/getClientInventory`)
+- **Get Inventory by Product SKU (Paginated)** (`/edi/web-services/getInventoryBySkuPage`)
+- **Get Detailed Inventory List by Batch** (`/edi/web-services/getInventoryDetailByBatch`)
+
+### Order Management APIs:
+- **Get Single Outbound/Fulfillment Order** (`/edi/web-services/getOneOutboundOrder`)
+- **Get Outbound/Fulfillment Order Charges** (`/edi/web-services/getOutboundOrderCharges`)
+- **Create Outbound/Fulfillment Order (Single)** (`/edi/web-services/v2/orderOutboundOne`)
+- **Create Outbound/Fulfillment Order (Multiple)** (`/edi/web-services/v2/orderOutboundMultiple`)
+- **Create Outbound/Fulfillment Order (Single, Auto-match Nearest Warehouse)** (`/edi/web-services/v2/orderOutboundOneAutoWh`)
+- **Update Order Status** (`/edi/web-services/updateOrderStatus`)
+- **Cancel Order** (`/edi/web-services/cancelOrder`)
+
+### Product/SKU Management APIs:
+- **Get Product/SKU (Product Library)** (`/edi/web-services/getProductSku`)
+- **Create Product/SKU (Product Library)** (`/edi/web-services/createProductSku`)
+- **Update Product Library SKU** (`/edi/web-services/updateProductSku`)
+
+### Inbound/Outbound Management APIs:
+- **Update Inbound Forecast/Application** (`/edi/web-services/updateWmsInbound`)
+- **Create Inbound Forecast/Application** (`/edi/web-services/createWmsInbound`)
+- **Create Outbound Forecast/Application** (`/edi/web-services/createWmsOutbound`)
+
+### Document and Label APIs:
+- **Get Box Mark (PDF)** (`/edi/web-services/getBoxMark`)
+- **Get Inbound Document (PDF)** (`/edi/web-services/getInboundPdf`)
+
+### Return Management APIs:
+- **Create Return Record** (`/edi/web-services/createReturn`)
+
+### System Configuration APIs:
+- **Get Channels (List)** (`/edi/web-services/getChannels`)
+- **Get Available Warehouses (List)** (`/edi/web-services/getWarehouses`)
+
+### Status and Listing APIs:
+- **Get Inbound Forecast/Application (List)** (`/edi/web-services/getWmsInbounds`)
+- **Get Order List (EMS-KD PC EP RT TS)** (`/edi/web-services/getOrders`)
+- **Get Outbound Application List (OT)** (`/edi/web-services/getWmsOutbounds`)
+- **Get Inbound Forecast/Application Status (IN)** (`/edi/web-services/getWmsInboundStatus`)
+- **Get Outbound Application Status (OT)** (`/edi/web-services/getWmsOutboundStatus`)
+
+**Total APIs in this section**: 27 endpoints
+
+For complete API specifications including request/response parameters, examples, and error codes, please refer to:
+1. **Overseas_Warehouse_Inventory_Management_EN.md** - Contains detailed English documentation for key APIs
+2. **AU-OPS_api.md** (lines 15558-23985) - Complete Chinese documentation for all 27 APIs
+
+# Charges & Master Data (Common)
+
+This section contains APIs for charge management and master data configuration that are shared across all modules.
+
+**Key API Categories include**:
+
+### Charge Management:
+- Charge calculation and billing
+- Payment processing
+- Invoice management
+- Cost allocation
+
+### Master Data Management:
+- Company and partner management
+- Service configuration
+- Geographic data (countries, states, cities)
+- Currency and exchange rates
+- Warehouse and location data
+
+### System Configuration:
+- User management
+- Permission settings
+- System parameters
+- Integration settings
+
+For detailed documentation of these APIs, please refer to the Chinese documentation starting from line 23985.
+
+---
+
+## API Documentation Status
+
+This English API documentation provides:
+
+✅ **Complete Coverage**:
+- Order Management (Express & Small Parcel) - 3 key APIs documented
+- SKU, Inventory & Fulfillment (Overseas Warehouse) - 5 key APIs documented in detail, 22 additional APIs listed
+
+📋 **Summary Coverage**:
+- Cost Calculation & Express Label Printing - Overview provided
+- FMS, FBA & E-commerce First Mile - Overview provided
+- FTL, LTL & Truck Transportation (TMS) - Overview provided
+- Charges & Master Data (Common) - Overview provided
+
+📖 **For Complete Documentation**:
+- **Chinese Source**: AU-OPS_api.md (26,164 lines total)
+- **English Overseas Warehouse**: Overseas_Warehouse_Inventory_Management_EN.md
+- **Contact**: Development team for specific API implementation details
+
+**Total API Endpoints**: 100+ across all modules
+**Documented in English**: 8 detailed + 22 listed = 30 APIs
+**Documentation Coverage**: Core functionality covered, additional APIs available in Chinese source

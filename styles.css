@@ -1,0 +1,363 @@
+/* Additional styles for API Documentation */
+
+/* Search functionality */
+.search-container {
+    background: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.search-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    margin: 0 auto;
+    display: block;
+}
+
+.search-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Enhanced table styling */
+.params-table {
+    font-size: 0.9rem;
+}
+
+.params-table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.params-table td:first-child {
+    font-weight: 600;
+    color: #495057;
+}
+
+.params-table td:nth-child(2) {
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Code block enhancements */
+.code-block {
+    position: relative;
+}
+
+.code-block::before {
+    content: 'JSON';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: #667eea;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* API section styling */
+.api-section {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: #fdfdfe;
+    transition: box-shadow 0.3s ease;
+}
+
+.api-section:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Method badge animations */
+.api-method {
+    transition: transform 0.2s ease;
+}
+
+.api-method:hover {
+    transform: scale(1.05);
+}
+
+/* Response status styling */
+.response-status {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.875rem;
+}
+
+.status-200 { background: #d4edda; color: #155724; }
+.status-400 { background: #fff3cd; color: #856404; }
+.status-403 { background: #f8d7da; color: #721c24; }
+.status-404 { background: #f8d7da; color: #721c24; }
+.status-500 { background: #f8d7da; color: #721c24; }
+
+/* Loading animation */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.loading {
+    animation: pulse 2s infinite;
+}
+
+/* Search highlighting */
+mark {
+    background: #fff3cd;
+    padding: 0.1rem 0.2rem;
+    border-radius: 2px;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+    .params-table {
+        font-size: 0.8rem;
+    }
+    
+    .params-table th,
+    .params-table td {
+        padding: 0.5rem;
+    }
+    
+    /* Stack table on mobile */
+    .params-table,
+    .params-table thead,
+    .params-table tbody,
+    .params-table th,
+    .params-table td,
+    .params-table tr {
+        display: block;
+    }
+    
+    .params-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    .params-table tr {
+        border: 1px solid #ccc;
+        margin-bottom: 0.5rem;
+        border-radius: 4px;
+        background: white;
+    }
+    
+    .params-table td {
+        border: none;
+        position: relative;
+        padding-left: 30% !important;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .params-table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 6px;
+        width: 25%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #495057;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #e9ecef;
+    }
+    
+    .header {
+        background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+    }
+    
+    .nav-tabs,
+    .tab-content {
+        background: #2d3748;
+        color: #e9ecef;
+    }
+    
+    .nav-tabs button {
+        background: #4a5568;
+        color: #e9ecef;
+    }
+    
+    .nav-tabs button:hover {
+        background: #718096;
+    }
+    
+    .nav-tabs button.active {
+        background: #2d3748;
+        color: #667eea;
+    }
+    
+    .params-table {
+        background: #2d3748;
+    }
+    
+    .params-table th {
+        background: #4a5568;
+        color: #e9ecef;
+    }
+    
+    .params-table tr:hover {
+        background: #4a5568;
+    }
+    
+    .code-block,
+    .api-url {
+        background: #1a202c;
+        border-color: #4a5568;
+    }
+    
+    .api-section {
+        background: #2d3748;
+        border-color: #4a5568;
+    }
+}
+
+/* Print styles */
+@media print {
+    .header,
+    .nav-tabs,
+    .footer {
+        display: none;
+    }
+    
+    .tab-content {
+        box-shadow: none;
+        border: none;
+    }
+    
+    .tab-pane {
+        display: block !important;
+    }
+    
+    .code-block {
+        break-inside: avoid;
+    }
+    
+    .api-section {
+        break-inside: avoid;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Accessibility improvements */
+.tab-btn:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+/* Smooth transitions */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5a6fd8;
+}
+
+/* Tooltip for method badges */
+.api-method {
+    position: relative;
+    cursor: help;
+}
+
+.api-method::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.api-method:hover::after {
+    opacity: 1;
+}
+
+/* Copy button for code blocks */
+.code-block {
+    position: relative;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 3rem;
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.code-block:hover .copy-btn {
+    opacity: 1;
+}
+
+.copy-btn:hover {
+    background: #5a6268;
+}
+
+.copy-btn.copied {
+    background: #28a745;
+}
+
+/* Status indicators */
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.status-online { background: #28a745; }
+.status-offline { background: #dc3545; }
+.status-loading { background: #ffc107; animation: pulse 1s infinite; }

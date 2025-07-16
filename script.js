@@ -11,6 +11,7 @@ class APIDocViewer {
         this.loadInitialContent();
         this.addSearchFunctionality();
         this.setupCopyButtons();
+        this.forceTextColors();
     }
 
     setupTabNavigation() {
@@ -77,6 +78,7 @@ class APIDocViewer {
             pane.innerHTML = htmlContent;
             this.highlightCode();
             this.addCopyButtonsToCodeBlocks();
+            this.forceTextColors();
 
         } catch (error) {
             console.error('Error loading content:', error);
@@ -271,11 +273,70 @@ class APIDocViewer {
             }
         });
     }
+
+    forceTextColors() {
+        // Force black text color on all elements to override night mode/dark mode
+        setTimeout(() => {
+            const elements = document.querySelectorAll('.tab-content *, .tab-pane *, .params-table *, .api-section *');
+            elements.forEach(element => {
+                // Skip elements that should keep their color (like method badges)
+                if (!element.classList.contains('method-get') &&
+                    !element.classList.contains('method-post') &&
+                    !element.classList.contains('method-put') &&
+                    !element.classList.contains('method-delete') &&
+                    !element.classList.contains('api-title')) {
+                    element.style.color = '#000000';
+                    element.style.webkitTextFillColor = '#000000';
+                    element.style.textShadow = 'none';
+                }
+            });
+
+            // Force table text to be black
+            const tableElements = document.querySelectorAll('table, th, td, tr');
+            tableElements.forEach(element => {
+                element.style.color = '#000000';
+                element.style.webkitTextFillColor = '#000000';
+                element.style.textShadow = 'none';
+            });
+
+            // Force headings to be black
+            const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            headings.forEach(heading => {
+                if (!heading.classList.contains('api-title')) {
+                    heading.style.color = '#000000';
+                    heading.style.webkitTextFillColor = '#000000';
+                    heading.style.textShadow = 'none';
+                    heading.style.fontWeight = '700';
+                }
+            });
+
+            // Force paragraphs and lists to be black
+            const textElements = document.querySelectorAll('p, li, span, div');
+            textElements.forEach(element => {
+                if (!element.classList.contains('method-get') &&
+                    !element.classList.contains('method-post') &&
+                    !element.classList.contains('method-put') &&
+                    !element.classList.contains('method-delete') &&
+                    !element.classList.contains('api-title') &&
+                    !element.classList.contains('loading') &&
+                    !element.classList.contains('error')) {
+                    element.style.color = '#000000';
+                    element.style.webkitTextFillColor = '#000000';
+                    element.style.textShadow = 'none';
+                }
+            });
+        }, 100);
+    }
 }
 
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new APIDocViewer();
+    const viewer = new APIDocViewer();
+
+    // Periodically force text colors to override any dynamic changes
+    setInterval(() => {
+        viewer.forceTextColors();
+    }, 2000);
 });
 
 // Add smooth scrolling for anchor links

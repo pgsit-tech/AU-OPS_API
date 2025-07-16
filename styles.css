@@ -1,78 +1,144 @@
 /* Additional styles for API Documentation */
 
-/* Enhanced text contrast and readability */
+/* Force override for night mode, dark mode, and browser extensions */
+* {
+    color-scheme: light !important;
+}
+
+body, html {
+    color-scheme: light !important;
+    forced-color-adjust: none !important;
+}
+
+/* Override any dark mode or night vision extensions */
+@media (prefers-color-scheme: light) {
+    * {
+        color: inherit !important;
+    }
+
+    body {
+        background-color: #f8f9fa !important;
+        color: #000000 !important;
+    }
+}
+
+/* Global text color override - Force black text everywhere */
+.tab-content *,
+.tab-pane *,
+.params-table *,
+.api-section * {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
+}
+
+/* Exception for specific colored elements */
+.api-title,
+.method-get,
+.method-post,
+.method-put,
+.method-delete,
+.nav-tabs button.active {
+    color: inherit !important;
+    -webkit-text-fill-color: inherit !important;
+}
+
+/* Enhanced text contrast and readability - Force override */
 h1, h2, h3, h4, h5, h6 {
-    color: #212529;
-    font-weight: 600;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
 }
 
 p, li, td, th, span, div {
-    color: #212529;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
 }
 
 /* Specific overrides for better readability */
 .tab-content {
-    color: #212529;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
 }
 
 .api-title {
     color: #667eea !important;
-    font-weight: 700;
+    font-weight: 700 !important;
+    -webkit-text-fill-color: #667eea !important;
 }
 
 .api-section h2, .api-section h3, .api-section h4 {
-    color: #212529 !important;
-    font-weight: 600;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    -webkit-text-fill-color: #000000 !important;
 }
 
 .params-table td {
-    color: #212529;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
 }
 
 .code-block {
     color: #212529;
 }
 
-/* Markdown content styling */
+/* Markdown content styling - Force black text */
 .tab-pane h1, .tab-pane h2, .tab-pane h3, .tab-pane h4, .tab-pane h5, .tab-pane h6 {
-    color: #212529 !important;
-    font-weight: 600;
+    color: #000000 !important;
+    font-weight: 700 !important;
     margin-top: 1.5rem;
     margin-bottom: 1rem;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
 }
 
 .tab-pane p {
-    color: #212529 !important;
+    color: #000000 !important;
     margin-bottom: 1rem;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
 }
 
 .tab-pane li {
-    color: #212529 !important;
+    color: #000000 !important;
     margin-bottom: 0.5rem;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
 }
 
 .tab-pane strong {
-    color: #212529 !important;
-    font-weight: 600;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
 }
 
 .tab-pane em {
-    color: #495057 !important;
+    color: #000000 !important;
     font-style: italic;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
 }
 
 /* Table content in markdown */
 .tab-pane table {
-    color: #212529 !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
 }
 
 .tab-pane table th {
-    color: #212529 !important;
-    font-weight: 600;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
 }
 
 .tab-pane table td {
-    color: #212529 !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    text-shadow: none !important;
 }
 
 /* Search functionality */
